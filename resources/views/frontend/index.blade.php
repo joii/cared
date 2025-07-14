@@ -228,7 +228,7 @@
                  {!! $home_contents[5]->detail_th !!}
 
                   <div class="buttons">
-                    <a class="btn btn-dark" href="{{ route('frontend.package_page') }}">
+                    <a class="btn btn-dark" href="{{ route('frontend.branch_page') }}">
                        {!! $home_contents[5]->name_th !!}
                     </a>
                 </div>
