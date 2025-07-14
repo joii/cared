@@ -17,6 +17,8 @@ use App\Models\PromotionPackage;
 use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\Faqs;
+use App\Models\GoogleAnalytic;
+use App\Models\GoogleTagManager;
 use PHPUnit\TextUI\Output\NullPrinter;
 
 class HomepageController extends Controller
@@ -81,8 +83,11 @@ class HomepageController extends Controller
         $footer = Footer::get();
         $home_contents = HomeContent::all();
         $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
 
-        return view('frontend.index', compact('navigation','banners', 'awards', 'testimonials', 'footer','home_contents'));
+        return view('frontend.index', compact('analytic','navigation','banners', 'awards', 'testimonials', 'footer','home_contents'));
     }
 
 
@@ -95,9 +100,12 @@ class HomepageController extends Controller
         $awards = Awards::all();
         $testimonials = Testimonial::all();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
 
-        return view('frontend.about', compact('navigation','banners', 'awards', 'testimonials', 'footer'));
+        return view('frontend.about', compact('analytic','navigation','banners', 'awards', 'testimonials', 'footer'));
     }
      public function ClinicPage()
     {
@@ -107,9 +115,12 @@ class HomepageController extends Controller
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $testimonials = Testimonial::all();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
 
-        return view('frontend.clinic', compact('navigation','banners','testimonials', 'footer'));
+        return view('frontend.clinic', compact('analytic','navigation','banners','testimonials', 'footer'));
     }
 
     public function NursingHomePage()
@@ -119,9 +130,12 @@ class HomepageController extends Controller
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
 
-        return view('frontend.nursing_home', compact('navigation','banners', 'footer'));
+        return view('frontend.nursing_home', compact('analytic','navigation','banners', 'footer'));
     }
 
     public function BranchesPage()
@@ -131,10 +145,13 @@ class HomepageController extends Controller
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
         $branches = Branch::where('status','active')->get();
 
-        return view('frontend.branches', compact('navigation','banners', 'branches','footer'));
+        return view('frontend.branches', compact('analytic','navigation','banners', 'branches','footer'));
     }
 
      public function BranchDetailPage(int $id,string $slug)
@@ -144,7 +161,10 @@ class HomepageController extends Controller
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
         $branch = Branch::find($id);
         $vibe_galleries = BranchGallery::where('branch_id',$id)->where('category_id',2)->where('status','active')->get();
         $galleries = BranchGallery::where('branch_id',$id)->where('category_id',1)->where('status','active')->get();
@@ -219,7 +239,7 @@ class HomepageController extends Controller
         if(count($detached_house) > 0){
             $has_detached_house = true;
         }
-        return view('frontend.branch_detail', compact('navigation','banners', 'branch','galleries','vibe_galleries','footer','rate_card_standard','rate_card_rehab','rate_card_happylike','rate_card_rehab2','has_detached_house','rehab_period','head_table_rehab','happylike_period','head_table_happylike','rehab2_period','head_table_rehab2'));
+        return view('frontend.branch_detail', compact('analytic','navigation','banners', 'branch','galleries','vibe_galleries','footer','rate_card_standard','rate_card_rehab','rate_card_happylike','rate_card_rehab2','has_detached_house','rehab_period','head_table_rehab','happylike_period','head_table_happylike','rehab2_period','head_table_rehab2'));
     }
 
     public function StrokeCenterPage()
@@ -229,9 +249,12 @@ class HomepageController extends Controller
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
 
-        return view('frontend.stroke_center', compact('navigation','banners', 'footer'));
+        return view('frontend.stroke_center', compact('analytic','navigation','banners', 'footer'));
     }
 
     public function HomeCarePage()
@@ -241,9 +264,12 @@ class HomepageController extends Controller
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
 
-        return view('frontend.home_care', compact('navigation','banners', 'footer'));
+        return view('frontend.home_care', compact('analytic','navigation','banners', 'footer'));
     }
 
     public function PackagePage()
@@ -253,10 +279,13 @@ class HomepageController extends Controller
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
         $packages = PromotionPackage::where('status','active')->get();
 
-        return view('frontend.cared_package', compact('navigation','banners', 'footer','packages'));
+        return view('frontend.cared_package', compact('analytic','navigation','banners', 'footer','packages'));
     }
 
     public function PackageDetailPage($id,string $slug)
@@ -266,10 +295,13 @@ class HomepageController extends Controller
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
         $package = PromotionPackage::find($id);
 
-        return view('frontend.package_detail', compact('navigation','banners', 'footer','package'));
+        return view('frontend.package_detail', compact('analytic','navigation','banners', 'footer','package'));
     }
 
     public function CaredShopPage()
@@ -279,10 +311,13 @@ class HomepageController extends Controller
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
 
 
-        return view('frontend.cared_shop', compact('navigation','banners', 'footer'));
+        return view('frontend.cared_shop', compact('analytic','navigation','banners', 'footer'));
     }
 
      public function AllArticlesListPage()
@@ -292,11 +327,14 @@ class HomepageController extends Controller
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
         $category_id = 1; // ID 1 = Latest News
         $articles = Article::where('category_id',$category_id)->where('status','active')->get();
         $article_categories = ArticleCategory::where('status','active')->get();
-        return view('frontend.articles', compact('navigation','banners', 'footer','articles','article_categories','category_id'));
+        return view('frontend.articles', compact('analytic','navigation','banners', 'footer','articles','article_categories','category_id'));
     }
 
     public function ArticlesListPage(int $category_id,string $slug)
@@ -306,10 +344,13 @@ class HomepageController extends Controller
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
         $articles = Article::where('category_id',$category_id)->where('status','active')->get();
         $article_categories = ArticleCategory::where('status','active')->get();
-        return view('frontend.articles', compact('navigation','banners', 'footer','articles','article_categories','category_id','slug'));
+        return view('frontend.articles', compact('analytic','navigation','banners', 'footer','articles','article_categories','category_id','slug'));
     }
 
       public function ArticleDetailPage(int $id,string $slug)
@@ -319,11 +360,14 @@ class HomepageController extends Controller
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
         $article = Article::where('id',$id)->where('status','active')->first();
         $article_categories = ArticleCategory::where('status','active')->get();
         $category_id = $article->category_id;
-        return view('frontend.article_detail', compact('navigation','banners', 'footer','article','article_categories','id','slug','category_id'));
+        return view('frontend.article_detail', compact('analytic','navigation','banners', 'footer','article','article_categories','id','slug','category_id'));
     }
 
     public function RateCardPage()
@@ -334,13 +378,16 @@ class HomepageController extends Controller
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
         $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
         $packages = PromotionPackage::where('status','active')
         ->where('package_category_id',3)
         ->where('start_date','<=',now())
         ->where('end_date','>=',now())
         ->get();
 
-        return view('frontend.rate_card', compact('navigation','banners', 'footer','packages'));
+        return view('frontend.rate_card', compact('analytic','navigation','banners', 'footer','packages'));
     }
 
     public function FAQsPage()
@@ -350,10 +397,13 @@ class HomepageController extends Controller
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
         $faqs = Faqs::where('status','active')->get();
 
-        return view('frontend.faqs', compact('navigation','banners', 'footer','faqs'));
+        return view('frontend.faqs', compact('analytic','navigation','banners', 'footer','faqs'));
     }
 
     public function FrenchiesPage()
@@ -363,10 +413,13 @@ class HomepageController extends Controller
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
 
 
-        return view('frontend.frenchies', compact('navigation','banners', 'footer'));
+        return view('frontend.frenchies', compact('analytic','navigation','banners', 'footer'));
     }
 
 
@@ -377,9 +430,12 @@ class HomepageController extends Controller
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
 
-        return view('frontend.service_process', compact('navigation','banners', 'footer'));
+        return view('frontend.service_process', compact('analytic','navigation','banners', 'footer'));
     }
 
     public function ContactUsPage()
@@ -389,9 +445,12 @@ class HomepageController extends Controller
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
         $footer = Footer::get();
-        $navigation = $this->getMainMenu(); //Navigations::where('status','active')->get();
+        $navigation = $this->getMainMenu();
+        $ga = GoogleAnalytic::all();
+        $gtm = GoogleTagManager::all();
+        $analytic = array($ga->first()->gtag, $gtm->first()->gtm_first_block, $gtm->first()->gtm_second_block);
 
-        return view('frontend.contact_us', compact('navigation','banners', 'footer'));
+        return view('frontend.contact_us', compact('analytic','navigation','banners', 'footer'));
     }
 
 

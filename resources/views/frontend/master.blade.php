@@ -17,10 +17,7 @@
 <meta property="og:description" content="ศูนย์ดูแลผู้สูงอายุและผู้ป่วยระยะพักฟื้น มีแพทย์ตรวจเยี่ยมประจำศูนย์ บริการด้วยความจริงใจ มีหนังสือรับรองถูกต้อง เจ้าหน้าทุกคนพร้อมให้บริการ" />
 <meta property="og:url" content="https://www.care-d.co/" />
 <meta property="og:site_name" content="บริการแก่ผู้สูงอายุและผู้มีภาวะพึ่งพิง ผ่านบริการที่ครบวงจร" />
-<meta property="article:modified_time" content="2025-07-01T03:07:26+00:00" />
 <meta property="og:image" content="{{ asset('frontend/assets/img/thumb/photo-800x1020.jpg') }}" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="google-site-verification" content="om8Cm6YO2uWBy8RTfogs-6GKXz_aChXbPdh5u1GZ7c4" />
 
 <link href="{{ asset('frontend/assets/css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/assets/css/aos.css') }}" rel="stylesheet">
@@ -28,9 +25,12 @@
 <link href="{{ asset('frontend/assets/css/swiper.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/assets/css/global.css') }}" rel="stylesheet">
 
+  @include('frontend.body.analytics_script')
+
+
 </head>
 <body>
-
+@include('frontend.body.analytics_body_script')
 <div class="page page-home p-0">
     <div class="preload">
         <span class="loader"></span>
