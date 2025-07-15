@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('token')->nullable();
+            $table->integer('order_id')->nullable();
+            $table->string('section_name')->nullable();
             $table->string('name_en')->nullable();
             $table->string('name_th')->nullable();
             $table->string('slug_en')->nullable();
