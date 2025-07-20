@@ -52,7 +52,7 @@
                                     <div>
                                         <div class="form-group mb-3">
                                             <label for="order_id" class="form-label">Order ID (leave blank if none)</label>
-                                            <input class="form-control" type="text" name="order_id"  id="order_id" value="{{ $navigation->order_id }}">
+                                            <input class="form-control" type="number" name="order_id"  id="order_id" value="{{ $navigation->order_id }}">
                                         </div>
                                     </div>
                                 </div>

@@ -440,7 +440,7 @@ class HomepageController extends Controller
 
     public function ContactUsPage()
     {
-        $section_name = 'contact';
+        $section_name = 'about';
         $current_nav = Navigations::where('section_name', $section_name)->where('parent_id',0)->first();
         $section_id = $current_nav->id;
         $banners = Banner::where('status','active')->where('section_id',$section_id)->orderBy('id', 'asc')->get();
