@@ -13,8 +13,11 @@
 <div class="section section-about">
     <div class="container">
        <div class="row">
+          <div class="hgroup text-center">
+                <h3 class="textrow"><span data-aos="fade-up">คำถามที่พบบ่อย</span></h3>
+            </div>
         @foreach ($faqs as $item)
-        <div class="col-md-4 col-12 mb-4">
+        <div class="col-md-4 col-12 mb-4 pt-3">
             <div class="card-review">
                 <div class="card-header">
                     <div>
